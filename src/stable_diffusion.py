@@ -12,6 +12,7 @@ import torch.nn.functional as F
 from loguru import logger
 
 import time
+import os
 
 class StableDiffusion(nn.Module):
     def __init__(self, device, model_name='CompVis/stable-diffusion-v1-4',concept_name=None, latent_mode=True):
@@ -56,10 +57,13 @@ class StableDiffusion(nn.Module):
 
     def load_concept(self, concept_name):
         repo_id_embeds = f"sd-concepts-library/{concept_name}"
-        learned_embeds_path = hf_hub_download(repo_id=repo_id_embeds, filename="learned_embeds.bin")
-        token_path = hf_hub_download(repo_id=repo_id_embeds, filename="token_identifier.txt")
-        with open(token_path, 'r') as file:
-            placeholder_token_string = file.read()
+        learned_embeds_path = os.path.join(repo_id_embeds, "learned_embeds.bin")
+        if not os.path.exists(learned_embeds_path):
+            learned_embeds_path = hf_hub_download(repo_id=repo_id_embeds, filename="learned_embeds.bin")
+        # learned_embeds_path = hf_hub_download(repo_id=repo_id_embeds, filename="learned_embeds.bin")
+        # token_path = hf_hub_download(repo_id=repo_id_embeds, filename="token_identifier.txt")
+        # with open(token_path, 'r') as file:
+        #     placeholder_token_string = file.read()
 
         loaded_learned_embeds = torch.load(learned_embeds_path, map_location="cpu")
 
