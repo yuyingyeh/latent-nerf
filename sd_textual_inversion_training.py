@@ -407,7 +407,8 @@ def main():
                     # Zero out the gradients for all token embeddings except the newly added
                     # embeddings for the concept, as we only want to optimize the concept embeddings
                     if accelerator.num_processes >= 1:
-                        grads = text_encoder.module.get_input_embeddings().weight.grad
+                        # grads = text_encoder.module.get_input_embeddings().weight.grad
+                        grads = text_encoder.get_input_embeddings().weight.grad
                     else:
                         grads = text_encoder.get_input_embeddings().weight.grad
                     # Get the index for tokens that we want to zero the grads for
