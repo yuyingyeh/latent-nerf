@@ -32,7 +32,8 @@ class GuideConfig:
     # A Textual-Inversion concept to use
     concept_name: Optional[str] = None
     # A huggingface diffusion model to use
-    diffusion_name: str = 'CompVis/stable-diffusion-v1-4'
+    # diffusion_name: str = 'CompVis/stable-diffusion-v1-4'
+    diffusion_name: str = '/openroomssubstance/yyeh/threestudio/runwayml/stable-diffusion-v1-5'
     # Scale of mesh in 1x1x1 cube
     shape_scale: float = 0.6
     # height of mesh
