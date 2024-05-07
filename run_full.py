@@ -68,8 +68,8 @@ def main():
             cmd += '--log.exp_name %s ' % exp_name
             cmd += '--guide.text "A photo of %s object" ' % ('<sks>' if args.concept_name != 'toy-cat' else '<toy-cat>')
             cmd += '--guide.shape_path %s ' % shape_path
-            # cmd += '--guide.concept_name=%s' % args.concept_name
-            cmd += '--guide.concept_name=%s/sd-concepts-library/%s' % (args.repo_root, args.concept_name)
+            cmd += '--guide.concept_name=%s' % args.concept_name
+            # cmd += '--guide.concept_name=%s/sd-concepts-library/%s' % (args.repo_root, args.concept_name)
             
             os.chdir(args.repo_root)
             print('>>> Running Command:')
